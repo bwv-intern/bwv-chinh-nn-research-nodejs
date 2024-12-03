@@ -11,7 +11,7 @@ data_source_1.appDataSource
     .then(() => {
     console.log('Data Source has been initialized!');
     app_1.default.listen(port, () => {
-        console.log('Server is running on port ', port);
+        console.log('Server is running on port', port);
     });
 })
     .catch((err) => {

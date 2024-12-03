@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
-let User = class User {
+let User = class User extends typeorm_1.BaseEntity {
     id;
     name;
     age;

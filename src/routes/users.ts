@@ -1,10 +1,12 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from 'express';
+import { UserController } from '../controllers/user';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req: Request, res: Response, next: NextFunction) {
-  res.send('respond with a resource');
-});
+const userController = new UserController();
 
-export default router;
+userRouter.get('/', userController.getAll.bind(userController));
+
+userRouter.post('/create', userController.create.bind(UserController));
+
+export { userRouter };

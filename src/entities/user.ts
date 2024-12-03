@@ -1,5 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -9,37 +10,37 @@ import {
 import { IUser } from '~/interfaces/user';
 
 @Entity()
-export class User {
+export class User extends BaseEntity implements IUser {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @Column()
   @IsNotEmpty()
-  age: number;
+  age!: number;
 
   @Column()
   @IsNotEmpty()
-  address: string;
+  address!: string;
 
   @Column()
   @IsNotEmpty()
-  gender: 'MALE' | 'FEMALE';
+  gender!: 'MALE' | 'FEMALE';
 
   @Column()
   @IsNotEmpty()
-  office: string;
+  office!: string;
 
   @Column()
   @IsNotEmpty()
-  position: string;
+  position!: string;
 
   @Column()
   @IsNotEmpty()
-  startDate: Date;
+  startDate!: Date;
 
   @CreateDateColumn({ name: 'createdAt' })
   createdAt!: Date;

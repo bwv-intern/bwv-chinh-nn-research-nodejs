@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { User } from './entities/user';
-console.log(process.env.DB_HOST);
+// console.log(process.env.DB_HOST);
+
 export const appDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',
@@ -14,7 +14,8 @@ export const appDataSource = new DataSource({
   password: '',
   //   database: process.env.DB_NAME,
   database: 'learning-node',
-  entities: [User],
   logging: true,
-  synchronize: true,
+  synchronize: false,
+  entities: ['src/entities/**/*.ts'],
+  migrations: ['src/migrations/**/*.ts'],
 });

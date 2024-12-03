@@ -7,7 +7,8 @@
     "build": "tsc",
     "dev": "tsc --watch --project . --outDir ./dist --onSuccess \"nodemon ./dist/bin/www.js\"",
     "lint": "eslint . --ext .ts",
-    "lint-and-fix": "eslint . --ext .ts --fix"
+    "lint-and-fix": "eslint . --ext .ts --fix",
+    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/modules/config/ormconfig.ts"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.8",

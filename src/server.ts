@@ -8,7 +8,7 @@ appDataSource
   .then(() => {
     console.log('Data Source has been initialized!');
     app.listen(port, () => {
-      console.log('Server is running on port ', port);
+      console.log('Server is running on port', port);
     });
   })
   .catch((err) => {

@@ -1,17 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
-const data_source_1 = require("~/data-source");
-const user_1 = require("~/entities/user");
+const format_1 = require("../utils/format");
+const user_1 = require("../models/user");
 class UserController {
-    UserRepository = data_source_1.appDataSource.getRepository(user_1.User);
-    async getAll(req, res, next) {
+    getAll = async (req, res, next) => {
         try {
-            const users = this.UserRepository.find();
-            res.json({
-                message: 'User retrived successfully.',
-                data: users,
-            });
+            const users = await user_1.User.findAll();
+            res.render('index', { title: 'Hello from User' });
         }
         catch (error) {
             console.log(error);
@@ -19,17 +15,41 @@ class UserController {
                 message: 'An error occured',
             });
         }
-    }
-    //   async getById(req: Request, res: Response, next: NextFunction) {
-    //     const id = req.params.id;
-    //     return this.UserRepository.findOne(id);
-    //   }
-    async create(req, res, next) {
-        console.log(req.body);
-        res.json({
-            message: 'oke',
+    };
+    getCreateView = async (req, res, next) => {
+        try {
+            res.render('create', { title: 'Create a new user' });
+        }
+        catch (error) {
+            res.json({
+                message: 'An error occured',
+            });
+        }
+    };
+    // async getById(req: Request, res: Response, next: NextFunction) {
+    //   const id = req.params.id;
+    //   return this.UserRepository.findOne({id});
+    // }
+    create = async (req, res, next) => {
+        const newUser = {
+            name: req.body.name,
+            phoneNumber: req.body.phoneNumber,
+            email: req.body.email,
+            age: +req.body.age,
+            address: req.body.address,
+            gender: req.body.gender,
+            office: req.body.office,
+            position: req.body.position,
+            startDate: (0, format_1.formatDate)(req.body.startDate),
+        };
+        const createdUser = await user_1.User.create(newUser);
+        res.status(201).json({
+            message: 'User created successfully.',
+            data: {
+                user: createdUser,
+            },
         });
-    }
+    };
 }
 exports.UserController = UserController;
 //# sourceMappingURL=user.js.map

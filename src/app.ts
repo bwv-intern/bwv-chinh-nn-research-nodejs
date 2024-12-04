@@ -2,9 +2,9 @@ import cookieParser from 'cookie-parser';
 import createError, { HttpError } from 'http-errors';
 import express, { NextFunction, Request, Response } from 'express';
 import logger from 'morgan';
+import bodyParser from 'body-parser';
 import path from 'path';
 
-import indexRouter from './routes/index';
 import { userRouter } from './routes/users';
 
 const app = express();
@@ -17,9 +17,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/users', userRouter);
 
 // catch 404 and forward to error handler

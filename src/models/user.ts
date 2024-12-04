@@ -1,5 +1,5 @@
 import { DataTypes, Model, Optional } from 'sequelize';
-import { sequelize } from '../config/db';
+import { sequelize } from '../config/database';
 
 interface IUser {
   id: number;
@@ -37,7 +37,8 @@ export class User extends Model<IUser, IUserInput> implements IUser {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -54,7 +55,7 @@ User.init(
       allowNull: false,
     },
     age: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     address: {

@@ -4,17 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
-const data_source_1 = require("./data-source");
+const database_1 = require("./config/database");
 const port = process.env.APP_PORT || 3000;
-data_source_1.appDataSource
-    .initialize()
+database_1.sequelize
+    .authenticate()
     .then(() => {
-    console.log('Data Source has been initialized!');
+    console.log('Sequelize has been initialized!');
     app_1.default.listen(port, () => {
         console.log('Server is running on port', port);
     });
 })
     .catch((err) => {
-    console.error('Error during Data Source initialization:', err);
+    console.error('Error during Sequelize initialization:', err);
 });
 //# sourceMappingURL=server.js.map

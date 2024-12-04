@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { formatDate } from '../utils/format';
-import { User } from '../models/user2';
+import { User } from '../models/user';
 
 export class UserController {
   public getAll = async (
@@ -27,7 +27,6 @@ export class UserController {
     try {
       res.render('create', { title: 'Create a new user' });
     } catch (error) {
-      console.log(error);
       res.json({
         message: 'An error occured',
       });
@@ -44,24 +43,27 @@ export class UserController {
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-    console.log(req.body);
+    const body = req.body;
 
-    const createdUser = User.create({
+    const newUser = {
       name: req.body.name,
       phoneNumber: req.body.phoneNumber,
       email: req.body.email,
-      age: req.body.age,
+      age: +req.body.age,
       address: req.body.address,
       gender: req.body.gender,
       office: req.body.office,
       position: req.body.position,
       startDate: formatDate(req.body.startDate),
-    });
+    };
 
-    console.log(createdUser);
+    const createdUser = await User.create(newUser);
 
-    res.json({
-      message: 'oke',
+    res.status(201).json({
+      message: 'User created successfully.',
+      data: {
+        user: createdUser,
+      },
     });
   };
 }

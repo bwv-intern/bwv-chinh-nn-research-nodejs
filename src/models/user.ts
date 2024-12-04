@@ -19,19 +19,19 @@ export interface IUserInput extends Optional<IUser, 'id'> {}
 export interface IUserOutput extends Required<IUser> {}
 
 export class User extends Model<IUser, IUserInput> implements IUser {
-  public id: number;
-  public name: string;
-  public phoneNumber: string;
-  public email: string;
-  public age: number;
-  public address: string;
-  public gender: 'MALE' | 'FEMALE';
-  public office: string;
-  public position: string;
-  public startDate: Date;
+  declare id: number;
+  declare name: string;
+  declare phoneNumber: string;
+  declare email: string;
+  declare age: number;
+  declare address: string;
+  declare gender: 'MALE' | 'FEMALE';
+  declare office: string;
+  declare position: string;
+  declare startDate: Date;
 
-  public readonly createdAt: Date;
-  public readonly updatedAt: Date;
+  declare readonly createdAt: Date;
+  declare readonly updatedAt: Date;
 }
 
 User.init(

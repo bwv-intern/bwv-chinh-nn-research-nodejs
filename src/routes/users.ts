@@ -9,6 +9,8 @@ userRouter.get('/', userController.getAll);
 
 userRouter.get('/create', userController.getCreateView);
 
+userRouter.get('/edit/:id', userController.getEditView);
+
 userRouter.post('/create', userController.create);
 
 export { userRouter };

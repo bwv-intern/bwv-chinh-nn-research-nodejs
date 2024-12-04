@@ -43,8 +43,6 @@ export class UserController {
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-    const body = req.body;
-
     const newUser = {
       name: req.body.name,
       phoneNumber: req.body.phoneNumber,
@@ -65,5 +63,17 @@ export class UserController {
         user: createdUser,
       },
     });
+  };
+
+  public getEditView = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    const id = req.query?.id;
+
+    const userFound = await User.findByPk(id as string);
+
+    res.render('edit', { title: 'Edit', data: userFound });
   };
 }

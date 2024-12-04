@@ -4,8 +4,8 @@ export interface IUser {
   age: number;
   address: string;
   gender: 'MALE' | 'FEMALE';
-  position: string;
   office: string;
+  position: string;
   startDate: Date;
   createdAt: Date;
   updatedAt: Date;

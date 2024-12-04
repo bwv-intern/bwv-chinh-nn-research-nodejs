@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon src/server.ts",
+    "start": "nodemon src/server.ts -ext ejs",
     "build": "tsc",
     "dev": "tsc --watch --project . --outDir ./dist --onSuccess \"nodemon ./dist/bin/www.js\"",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
-    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/modules/config/ormconfig.ts"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "npx typeorm-ts-node-commonjs migration:generate -d ./src/data-source/index.ts",
+    "migration:revert": "npx typeorm-ts-node-commonjs migration:generate -d ./src/data-source/index.ts",
+    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source/index.ts"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.8",
@@ -23,13 +26,16 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
+    "mysql2": "^3.11.5",
     "nodemon": "^3.1.7",
     "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.5",
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.20",
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.12"
+    "@types/debug": "^4.1.12",
+    "sequelize-cli": "^6.6.2"
   }
 }

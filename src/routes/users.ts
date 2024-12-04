@@ -5,8 +5,10 @@ const userRouter = express.Router();
 
 const userController = new UserController();
 
-userRouter.get('/', userController.getAll.bind(userController));
+userRouter.get('/', userController.getAll);
 
-userRouter.post('/create', userController.create.bind(UserController));
+userRouter.get('/create', userController.getCreateView);
+
+userRouter.post('/create', userController.create);
 
 export { userRouter };

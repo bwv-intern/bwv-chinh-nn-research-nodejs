@@ -1,44 +1,67 @@
 import { NextFunction, Request, Response } from 'express';
-import { appDataSource } from '../data-source';
-import { User } from '../entities/user';
+import { formatDate } from '../utils/format';
+import { User } from '../models/user2';
 
 export class UserController {
-  private UserRepository = appDataSource.getRepository(User);
-
-  public async getAll(
+  public getAll = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
-      console.log(this, 'this');
-      const users = await this.UserRepository.find();
-      res.json({
-        message: 'User retrived successfully.',
-        data: users,
-      });
+      const users = await User.findAll();
+      res.render('index', { title: 'Hello from User' });
     } catch (error) {
       console.log(error);
       res.json({
         message: 'An error occured',
       });
     }
-  }
+  };
 
-  //   async getById(req: Request, res: Response, next: NextFunction) {
-  //     const id = req.params.id;
-  //     return this.UserRepository.findOne(id);
-  //   }
-
-  public async create(
+  public getCreateView = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
+    try {
+      res.render('create', { title: 'Create a new user' });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: 'An error occured',
+      });
+    }
+  };
+
+  // async getById(req: Request, res: Response, next: NextFunction) {
+  //   const id = req.params.id;
+  //   return this.UserRepository.findOne({id});
+  // }
+
+  public create = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
     console.log(req.body);
+
+    const createdUser = User.create({
+      name: req.body.name,
+      phoneNumber: req.body.phoneNumber,
+      email: req.body.email,
+      age: req.body.age,
+      address: req.body.address,
+      gender: req.body.gender,
+      office: req.body.office,
+      position: req.body.position,
+      startDate: formatDate(req.body.startDate),
+    });
+
+    console.log(createdUser);
 
     res.json({
       message: 'oke',
     });
-  }
+  };
 }

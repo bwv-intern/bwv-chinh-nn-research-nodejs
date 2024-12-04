@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../../public/stylesheets/style.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
+    <style>
+        a:hover {
+            color: red;
+            transition: all 0.2 linear;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="flex flex-col h-dvh">
+        <header class="bg-yellow-600">
+            <nav>
+                <h1
+                class="text-white text-3xl uppercase font-semibold leading-[70px] text-center"
+                >
+                    Users Management Admin
+                </h1>
+                <ul class="flex items-center justify-center gap-10 bg-[#0077bb] text-xl py-3 text-white">
+                    <li>
+                        <a href="/users">
+                            List
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/users/create">
+                            Create
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>

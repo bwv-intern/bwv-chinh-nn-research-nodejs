@@ -1,68 +1,48 @@
-import { IsNotEmpty } from 'class-validator';
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { IUser } from '~/interfaces/user';
+// import {
+//   BaseEntity,
+//   Column,
+//   CreateDateColumn,
+//   Entity,
+//   PrimaryGeneratedColumn,
+//   UpdateDateColumn,
+// } from 'typeorm';
+// import { IUser } from '~/interfaces/user';
 
-@Entity()
-export class User extends BaseEntity implements IUser {
-  @PrimaryGeneratedColumn()
-  id!: number;
+// @Entity()
+// export class User extends BaseEntity implements IUser {
+//   @PrimaryGeneratedColumn()
+//   id: number;
 
-  @Column()
-  @IsNotEmpty()
-  name!: string;
+//   @Column()
+//   name: string;
 
-  @Column()
-  @IsNotEmpty()
-  age!: number;
+//   @Column()
+//   phoneNumber: string;
 
-  @Column()
-  @IsNotEmpty()
-  address!: string;
+//   @Column()
+//   email: string;
 
-  @Column()
-  @IsNotEmpty()
-  gender!: 'MALE' | 'FEMALE';
+//   @Column()
+//   age: number;
 
-  @Column()
-  @IsNotEmpty()
-  office!: string;
+//   @Column()
+//   address: string;
 
-  @Column()
-  @IsNotEmpty()
-  position!: string;
+//   @Column()
+//   gender: 'MALE' | 'FEMALE';
 
-  @Column()
-  @IsNotEmpty()
-  startDate!: Date;
+//   @Column()
+//   office: string;
 
-  @CreateDateColumn({ name: 'createdAt' })
-  createdAt!: Date;
+//   @Column()
+//   position: string;
 
-  @UpdateDateColumn({ name: 'updatedAt' })
-  updatedAt!: Date;
+//   @Column()
+//   startDate: Date;
 
-  //   constructor({
-  //     name,
-  //     age,
-  //     address,
-  //     gender,
-  //     office,
-  //     position,
-  //     startDate,
-  //   }: IUser) {
-  //     this.name = name;
-  //     this.age = age;
-  //     this.address = address;
-  //     this.gender = gender;
-  //     this.office = office;
-  //     this.position = position;
-  //     this.startDate = startDate;
-  //   }
-}
+//   @CreateDateColumn({ name: 'createdAt' })
+//   createdAt: Date;
+
+//   @UpdateDateColumn({ name: 'updatedAt' })
+//   updatedAt: Date;
+// }

@@ -1,16 +1,16 @@
 import app from './app';
-import { appDataSource } from './data-source';
+import { sequelize } from './config/db';
 
 const port = process.env.APP_PORT || 3000;
 
-appDataSource
-  .initialize()
+sequelize
+  .authenticate()
   .then(() => {
-    console.log('Data Source has been initialized!');
+    console.log('Sequelize has been initialized!');
     app.listen(port, () => {
       console.log('Server is running on port', port);
     });
   })
   .catch((err) => {
-    console.error('Error during Data Source initialization:', err);
+    console.error('Error during Sequelize initialization:', err);
   });

@@ -4,6 +4,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
+import methodOverride from 'method-override';
 
 import { userRouter } from './routes/users';
 
@@ -19,7 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
+app.use('/', userRouter);
 app.use('/users', userRouter);
 
 // catch 404 and forward to error handler

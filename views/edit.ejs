@@ -2,11 +2,12 @@
 
 <div class="px-8 py-4 flex-1">
   <div class="bg-orange-100 rounded-lg px-4 py-3">
-    <h1 class="text-xl font-semibold">Update a <%= data.name %></h1>
-    <form action="/users/edit/<%= data.id %>" method="post" class="mt-2">
+    <h1 class="text-xl font-semibold">Update profile of <%= data.name %></h1>
+    <form action="/users/edit?_method=PUT" method="post" class="mt-2">
       <fieldset class="border border-gray-300 px-6 py-4">
-        <legend class="text-lg">Information Of User</legend>
+        <legend class="text-lg">Information Of <%= data.name %></legend>
         <div class="flex justify-between gap-12">
+          <input type="hidden" name="id" id="id" value="<%= data.id %>" />
           <div class="flex-1 w-full">
             <label for="name" class="block mb-1">Name</label>
             <input
@@ -57,13 +58,12 @@
           <div class="flex-1 w-full">
             <label for="gender" class="block mb-1">Gender</label>
             <select
-              value="<%= data.gender %>"
               name="gender"
               id="gender"
               class="py-1 px-2 w-full rounded-md"
             >
-              <option value="MALE">Male</option>
-              <option value="FEMAIL">Female</option>
+              <option value="MALE" <%= data?.gender === "MALE" ? 'selected' : ''  %>>Male</option>
+              <option value="FEMALE" <%= data?.gender === "FEMALE" ? 'selected' : ''  %>>Female</option>
             </select>
           </div>
           <div class="flex-1 w-full">

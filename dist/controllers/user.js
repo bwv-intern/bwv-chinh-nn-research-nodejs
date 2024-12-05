@@ -7,11 +7,16 @@ class UserController {
     getAll = async (req, res, next) => {
         try {
             const users = await user_1.User.findAll();
-            res.render('index', { title: 'Hello from User' });
+            res.render('index', {
+                title: 'List of Users',
+                data: users.map((user) => ({
+                    ...user.dataValues,
+                    startDate: (0, format_1.formatToUIDate)(user.startDate),
+                })),
+            });
         }
         catch (error) {
-            console.log(error);
-            res.json({
+            res.status(500).json({
                 message: 'An error occured',
             });
         }
@@ -21,34 +26,84 @@ class UserController {
             res.render('create', { title: 'Create a new user' });
         }
         catch (error) {
-            res.json({
+            res.status(500).json({
                 message: 'An error occured',
             });
         }
     };
-    // async getById(req: Request, res: Response, next: NextFunction) {
-    //   const id = req.params.id;
-    //   return this.UserRepository.findOne({id});
-    // }
     create = async (req, res, next) => {
-        const newUser = {
-            name: req.body.name,
-            phoneNumber: req.body.phoneNumber,
-            email: req.body.email,
-            age: +req.body.age,
-            address: req.body.address,
-            gender: req.body.gender,
-            office: req.body.office,
-            position: req.body.position,
-            startDate: (0, format_1.formatDate)(req.body.startDate),
-        };
-        const createdUser = await user_1.User.create(newUser);
-        res.status(201).json({
-            message: 'User created successfully.',
-            data: {
-                user: createdUser,
-            },
-        });
+        try {
+            const newUser = {
+                name: req.body.name,
+                phoneNumber: req.body.phoneNumber,
+                email: req.body.email,
+                age: +req.body.age,
+                address: req.body.address,
+                gender: req.body.gender,
+                office: req.body.office,
+                position: req.body.position,
+                startDate: (0, format_1.formatToSQLDate)(req.body.startDate),
+            };
+            await user_1.User.create(newUser);
+            res.redirect('/users');
+        }
+        catch (error) {
+            res.status(500).json({
+                message: 'An error occured',
+            });
+        }
+    };
+    getEditView = async (req, res, next) => {
+        const id = req.params?.id;
+        const userFound = await user_1.User.findByPk(id);
+        res.render('edit', { title: 'Edit', data: userFound });
+    };
+    edit = async (req, res, next) => {
+        try {
+            const id = req.body.id;
+            const userFound = await user_1.User.findByPk(id);
+            if (!userFound) {
+                res.status(404).json({
+                    message: 'User not found',
+                });
+                return;
+            }
+            const updateUser = {
+                name: req.body.name,
+                phoneNumber: req.body.phoneNumber,
+                email: req.body.email,
+                age: +req.body.age,
+                address: req.body.address,
+                gender: req.body.gender,
+                office: req.body.office,
+                position: req.body.position,
+                startDate: (0, format_1.formatToSQLDate)(req.body.startDate),
+            };
+            await user_1.User.update(updateUser, {
+                where: { id: id },
+            });
+            res.redirect('/users/edit/' + id);
+        }
+        catch (error) {
+            res.status(500).json({
+                message: 'An error occured',
+            });
+        }
+    };
+    delete = async (req, res, next) => {
+        try {
+            const id = req.body.id;
+            const userFound = await user_1.User.findByPk(id);
+            if (!userFound) {
+                res.status(404).json({
+                    message: 'User not found',
+                });
+                return;
+            }
+            await user_1.User.destroy({ where: { id } });
+            res.redirect('/users');
+        }
+        catch (error) { }
     };
 }
 exports.UserController = UserController;

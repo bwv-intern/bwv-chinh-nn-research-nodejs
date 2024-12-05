@@ -4,18 +4,6 @@ exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const database_1 = require("../config/database");
 class User extends sequelize_1.Model {
-    id;
-    name;
-    phoneNumber;
-    email;
-    age;
-    address;
-    gender;
-    office;
-    position;
-    startDate;
-    createdAt;
-    updatedAt;
 }
 exports.User = User;
 User.init({

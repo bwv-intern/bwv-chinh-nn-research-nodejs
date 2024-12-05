@@ -11,5 +11,8 @@ exports.userRouter = userRouter;
 const userController = new user_1.UserController();
 userRouter.get('/', userController.getAll);
 userRouter.get('/create', userController.getCreateView);
+userRouter.get('/edit/:id', userController.getEditView);
 userRouter.post('/create', userController.create);
+userRouter.put('/edit', userController.edit);
+userRouter.delete('/delete', userController.delete);
 //# sourceMappingURL=users.js.map

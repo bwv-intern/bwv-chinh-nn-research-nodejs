@@ -13,4 +13,8 @@ userRouter.get('/edit/:id', userController.getEditView);
 
 userRouter.post('/create', userController.create);
 
+userRouter.put('/edit', userController.edit);
+
+userRouter.delete('/delete', userController.delete);
+
 export { userRouter };

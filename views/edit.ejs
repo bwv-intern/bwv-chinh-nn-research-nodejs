@@ -1,0 +1,126 @@
+<% include layout/header %>
+
+<div class="px-8 py-4 flex-1">
+  <div class="bg-orange-100 rounded-lg px-4 py-3">
+    <h1 class="text-xl font-semibold">Update profile of <%= data.name %></h1>
+    <form action="/users/edit?_method=PUT" method="post" class="mt-2">
+      <fieldset class="border border-gray-300 px-6 py-4">
+        <legend class="text-lg">Information Of <%= data.name %></legend>
+        <div class="flex justify-between gap-12">
+          <input type="hidden" name="id" id="id" value="<%= data.id %>" />
+          <div class="flex-1 w-full">
+            <label for="name" class="block mb-1">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter the name"
+              id="name"
+              value="<%= data.name %>"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+          <div class="flex-1 w-full">
+            <label for="phoneNumber" class="block mb-1">Phone Number</label>
+            <input
+              type="text"
+              placeholder="Enter the phone number"
+              name="phoneNumber"
+              value="<%= data.phoneNumber %>"
+              id="phoneNumber"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+          <div class="flex-1 w-full">
+            <label for="email" class="block mb-1">Email</label>
+            <input
+              type="text"
+              placeholder="Enter the email"
+              value="<%= data.email %>"
+              name="email"
+              id="email"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+          <div class="flex-1 w-full">
+            <label for="age" class="block mb-1">Age</label>
+            <input
+              type="number"
+              value="<%= data.age %>"
+              min="1"
+              placeholder="Enter the age"
+              name="age"
+              id="age"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+        </div>
+        <div class="flex justify-between mt-4 gap-12">
+          <div class="flex-1 w-full">
+            <label for="gender" class="block mb-1">Gender</label>
+            <select
+              name="gender"
+              id="gender"
+              class="py-1 px-2 w-full rounded-md"
+            >
+              <option value="MALE" <%= data?.gender === "MALE" ? 'selected' : ''  %>>Male</option>
+              <option value="FEMALE" <%= data?.gender === "FEMALE" ? 'selected' : ''  %>>Female</option>
+            </select>
+          </div>
+          <div class="flex-1 w-full">
+            <label for="office" class="block mb-1">Office</label>
+            <input
+              type="text"
+              value="<%= data.office %>"
+              placeholder="Enter the office"
+              name="office"
+              id="office"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+          <div class="flex-1 w-full">
+            <label for="position" class="block mb-1">Position</label>
+            <input
+              type="text"
+              value="<%= data.position %>"
+              placeholder="Enter the position"
+              name="position"
+              id="position"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+          <div class="flex-1 w-full">
+            <label for="startDate" class="block mb-1">Start Date</label>
+            <input
+              type="date"
+              value="<%= data.startDate %>"
+              name="startDate"
+              id="startDate"
+              class="py-1 px-2 w-full rounded-md"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label for="startDate" class="block mb-1">Address</label>
+          <input
+            type="text"
+            value="<%= data.address %>"
+            name="address"
+            placeholder="Enter the address"
+            id="address"
+            class="py-1 px-2 w-full rounded-md"
+          />
+        </div>
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="bg-[#0077bb] text-white float-right py-2 rounded-md cursor-pointer px-3"
+          >
+            Update
+          </button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<% include layout/footer %>

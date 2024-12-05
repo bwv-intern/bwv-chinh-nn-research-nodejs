@@ -1,0 +1,4 @@
+# Ignore some HTML files:
+**/header.ejs
+**/footer.ejs
+**/migrations/*.ts

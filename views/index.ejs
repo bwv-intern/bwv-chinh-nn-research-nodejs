@@ -1,0 +1,87 @@
+<% include layout/header %>
+
+<div class="px-8 py-4 flex-1">
+  <form
+    action="/users"
+    method="get"
+    class="flex items-center gap-2 float-right mb-4"
+  >
+    <input
+      class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
+      type="date"
+      name="dateStart"
+      id="dateStart"
+      value="<%= filter.dateStart %>"
+    />
+    <input
+      class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
+      type="date"
+      name="dateEnd"
+      id="dateEnd"
+      value="<%= filter.dateEnd %>"
+    />
+    <button type="submit" class="bg-blue-500 rounded-md px-3 py-1 text-white">
+      Filter
+    </button>
+  </form>
+  <table id="myTable" class="display">
+    <thead>
+      <tr>
+        <th class="!text-left">#</th>
+        <th>Name</th>
+        <th class="!text-left">Phone Number</th>
+        <th>Email</th>
+        <th class="!text-left">Age</th>
+        <th class="!text-left">Address</th>
+        <th>Gender</th>
+        <th>Office</th>
+        <th>Position</th>
+        <th class="!text-left">Start Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i = 0; i < data.length; i++) { %>
+      <tr>
+        <td class="!text-left"><%= i + 1 %></td>
+        <td><%= data[i].name %></td>
+        <td class="!text-left"><%= data[i].phoneNumber %></td>
+        <td><%= data[i].email %></td>
+        <td class="!text-left"><%= data[i].age %></td>
+        <td><%= data[i].address %></td>
+        <td><%= data[i].gender %></td>
+        <td><%= data[i].office %></td>
+        <td><%= data[i].position %></td>
+        <td class="!text-left"><%= data[i].startDate %></td>
+        <td>
+          <div class="flex items-center gap-2">
+            <a
+              href="/users/edit/<%= data[i].id %>"
+              class="text-white bg-blue-500 py-1 px-2 rounded-md inline-block hover:text-white"
+            >
+              Edit
+            </a>
+            <form action="/users/delete?_method=DELETE" method="post">
+              <input type="hidden" name="id" value="<%= data[i].id %>" />
+              <button
+                type="submit"
+                class="text-white bg-red-500 py-1 px-2 rounded-md"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#myTable').DataTable();
+  });
+</script>
+
+<% include layout/footer %>

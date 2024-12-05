@@ -9,9 +9,8 @@
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "typeorm": "typeorm-ts-node-commonjs",
-    "migration:generate": "npx typeorm-ts-node-commonjs migration:generate -d ./src/data-source/index.ts",
-    "migration:revert": "npx typeorm-ts-node-commonjs migration:generate -d ./src/data-source/index.ts",
-    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source/index.ts"
+    "migration:generate-db": "npx sequelize-cli model:generate",
+    "migration:table": "npx sequelize-cli db:migrate"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.8",
@@ -26,6 +25,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "jquery-validation": "^1.21.0",
     "method-override": "^3.0.0",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",

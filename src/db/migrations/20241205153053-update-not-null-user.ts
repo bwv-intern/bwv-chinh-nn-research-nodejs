@@ -4,8 +4,8 @@ import { QueryInterface, DataTypes } from 'sequelize';
 module.exports = {
   async up(queryInterface: QueryInterface, Sequelize:typeof DataTypes) {
     await queryInterface.changeColumn('Users', 'name', {
-        type: Sequelize.STRING,
-        allowNull: false
+      type: Sequelize.STRING,
+      allowNull: false
     });
     await queryInterface.changeColumn('Users', 'phoneNumber', {
       type: Sequelize.STRING,

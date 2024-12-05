@@ -1,6 +1,11 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from '../config/database';
 
+enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
+
 interface IUser {
   id: number;
   name: string;
@@ -8,7 +13,7 @@ interface IUser {
   email: string;
   age: number;
   address: string;
-  gender: 'MALE' | 'FEMALE';
+  gender: Gender;
   office: string;
   position: string;
   startDate: Date;
@@ -25,7 +30,7 @@ export class User extends Model<IUser, IUserInput> implements IUser {
   declare email: string;
   declare age: number;
   declare address: string;
-  declare gender: 'MALE' | 'FEMALE';
+  declare gender: Gender;
   declare office: string;
   declare position: string;
   declare startDate: Date;

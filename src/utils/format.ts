@@ -1,11 +1,3 @@
-export const formatToSQLDate = (date: string): Date => {
-  const dateToFormat = new Date(date);
-
-  const formattedDate = dateToFormat.toISOString().split('T')[0];
-
-  return formattedDate as unknown as Date;
-};
-
 export const formatToUIDate = (date: Date): Date => {
   const splittedDate = date.toString().split('-');
 

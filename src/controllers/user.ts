@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { formatToSQLDate, formatToUIDate } from '../utils/format';
 import { User } from '../models/user';
 import { and, Op } from 'sequelize';
-
 export class UserController {
   public getAll = async (
     req: Request,
@@ -12,33 +10,19 @@ export class UserController {
     try {
       const query = req.query;
 
-      let options = {};
-      if (query?.dateStart && query?.dateEnd) {
-        options = and({
-          startDate: {
-            [Op.and]: {
-              [Op.gte]: query?.dateStart,
-              [Op.lte]: query?.dateEnd,
-            },
-          },
-        });
+      const dateConditions = {};
+      if (query?.dateStart) {
+        dateConditions[Op.gte] = query?.dateStart;
+      }
+      if (query?.dateEnd) {
+        dateConditions[Op.lte] = query?.dateEnd;
       }
 
-      if (query?.dateStart && !query?.dateEnd) {
-        options = and({
-          startDate: {
-            [Op.gte]: query?.dateStart,
-          },
-        });
-      }
-
-      if (!query?.dateStart && query?.dateEnd) {
-        options = and({
-          startDate: {
-            [Op.lte]: query?.dateEnd,
-          },
-        });
-      }
+      const options = and({
+        startDate: {
+          [Op.and]: dateConditions,
+        },
+      });
 
       const users = await User.findAll({
         where: options,
@@ -46,10 +30,7 @@ export class UserController {
 
       res.render('index', {
         title: 'List of Users',
-        data: users.map((user) => ({
-          ...user.dataValues,
-          startDate: formatToUIDate(user.startDate),
-        })),
+        data: users,
         filter: {
           dateStart: query?.dateStart || '',
           dateEnd: query?.dateEnd || '',
@@ -86,12 +67,12 @@ export class UserController {
         name: req.body.name,
         phoneNumber: req.body.phoneNumber,
         email: req.body.email,
-        age: +req.body.age,
+        age: Number(req.body.age),
         address: req.body.address,
         gender: req.body.gender,
         office: req.body.office,
         position: req.body.position,
-        startDate: formatToSQLDate(req.body.startDate),
+        startDate: req.body.startDate,
       };
 
       await User.create(newUser);
@@ -143,12 +124,12 @@ export class UserController {
         name: req.body.name,
         phoneNumber: req.body.phoneNumber,
         email: req.body.email,
-        age: +req.body.age,
+        age: Number(req.body.age),
         address: req.body.address,
         gender: req.body.gender,
         office: req.body.office,
         position: req.body.position,
-        startDate: formatToSQLDate(req.body.startDate),
+        startDate: req.body.startDate,
       };
 
       await User.update(updateUser, {

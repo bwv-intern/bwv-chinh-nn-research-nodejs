@@ -3,6 +3,7 @@ import { validate } from 'class-validator';
 import { and, Op } from 'sequelize';
 import { User } from '../models/user';
 import { UserValidator } from '../validations/user';
+import dayjs from 'dayjs';
 
 export class UserController {
   public getAll = async (
@@ -38,6 +39,7 @@ export class UserController {
           dateStart: query?.dateStart || '',
           dateEnd: query?.dateEnd || '',
         },
+        dayjs,
       });
     } catch (error) {
       res.status(500).json({

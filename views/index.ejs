@@ -51,7 +51,9 @@
         <td><%= data[i].gender %></td>
         <td><%= data[i].office %></td>
         <td><%= data[i].position %></td>
-        <td class="!text-left"><%= data[i].startDate %></td>
+        <td class="!text-left">
+          <%= dayjs(data[i].startDate).format('DD-MM-YYYY') %>
+        </td>
         <td>
           <div class="flex items-center gap-2">
             <a

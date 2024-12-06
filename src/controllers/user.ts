@@ -3,6 +3,7 @@ import { validate } from 'class-validator';
 import { and, Op } from 'sequelize';
 import { User } from '../models/user';
 import { UserValidator } from '../validations/user';
+
 export class UserController {
   public getAll = async (
     req: Request,

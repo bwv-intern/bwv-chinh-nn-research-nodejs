@@ -2,7 +2,7 @@ import { ValidationOptions } from 'class-validator';
 
 export class ValidatedOptions {
   private upFirstChar = (char: string): string => {
-    return char.slice(0).toLocaleUpperCase() + char.slice(1);
+    return char.slice(0, 1).toLocaleUpperCase() + char.slice(1);
   };
 
   public shouldNotEmpty = (name: string): ValidationOptions => {

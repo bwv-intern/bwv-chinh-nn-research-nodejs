@@ -9,37 +9,31 @@ import {
   Min,
   MinLength,
   Validate,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
 } from 'class-validator';
 import { Gender } from '../constants/enums';
 import { User } from '../models/user';
 import { ValidatedOptions } from '../utils/helper';
+import { ValidationArguments } from 'class-validator';
 
-import {
-  registerDecorator,
-  ValidationOptions,
-  ValidationArguments,
-} from 'class-validator';
+@ValidatorConstraint({ name: 'duplicatedEmail', async: false })
+export class IsDuplicatedEmail implements ValidatorConstraintInterface {
+  async validate(value: string, args: ValidationArguments) {
+    if (!value) {
+      return;
+    }
 
-function IsDuplicatedEmail(validationOptions?: ValidationOptions) {
-  return function (object: any, propertyName: string) {
-    registerDecorator({
-      name: 'IsDuplicatedEmail',
-      target: object.constructor,
-      propertyName: propertyName,
-      options: validationOptions,
-      async validator(value: string, args: ValidationArguments) {
-        try {
-          const existedUser = await User.findOne({ where: { email: value } });
-          if (existedUser) {
-            return false;
-          }
-          return true;
-        } catch (error) {
-          throw new Error('Error checking email duplication');
-        }
-      },
-    });
-  };
+    const existedUser = await User.findOne({ where: { email: value } });
+    if (existedUser) {
+      return false;
+    }
+    return true;
+  }
+
+  defaultMessage(args: ValidationArguments) {
+    return 'Email is already exist.';
+  }
 }
 
 const validatedOptions = new ValidatedOptions();
@@ -59,7 +53,7 @@ export class UserValidator {
   @IsString(validatedOptions.shouldBeString('email'))
   @IsEmail()
   @MaxLength(255, validatedOptions.shouldLessThan256('email'))
-  @IsDuplicatedEmail()
+  @Validate(IsDuplicatedEmail)
   email: string;
 
   @IsNotEmpty(validatedOptions.shouldNotEmpty('age'))

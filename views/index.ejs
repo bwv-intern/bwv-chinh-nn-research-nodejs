@@ -77,19 +77,6 @@
   </table>
 </div>
 
-<script>
-  $(document).ready(function () {
-    $('#myTable').DataTable();
-  });
-
-  $('form.filter').on('submit', function (event) {
-    event.preventDefault();
-
-    $('#dateStart').val();
-    if ($('#dateStart').val() > $('#dateEnd').val()) {
-      $('.filter-error').html('(*) Start Date can not greater than End Date.');
-    }
-  });
-</script>
+<script src="/javascripts/index.js"></script>
 
 <% include layout/footer %>

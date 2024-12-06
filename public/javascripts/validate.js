@@ -7,6 +7,22 @@ jQuery.validator.addMethod('phoneVN', function (phoneNumber, element) {
   );
 });
 
+jQuery.validator.addMethod('duplicatedEmail', function (email, element) {
+  let isNotExited = true;
+  $.ajax({
+    method: 'get',
+    url: '/users/email/' + email,
+    async: false,
+    success: function (result) {
+      isNotExited = false;
+    },
+    error: function (error) {
+      isNotExited = true;
+    },
+  });
+  return this.optional(element) || isNotExited;
+});
+
 $('form').validate({
   rules: {
     name: {
@@ -20,6 +36,7 @@ $('form').validate({
     email: {
       required: true,
       maxlength: 255,
+      duplicatedEmail: true,
       email: true,
     },
     age: {
@@ -49,6 +66,7 @@ $('form').validate({
     email: {
       required: '(*) Email is required',
       email: '(*) Not valid email',
+      duplicatedEmail: '(*) Email already exist.',
     },
     age: {
       required: '(*) Age is required',

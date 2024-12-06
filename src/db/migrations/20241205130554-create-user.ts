@@ -12,40 +12,31 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       phoneNumber: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       email: {
         unique: true,
         type: Sequelize.STRING,
-        allowNull: false,
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false,
       },
       address: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       gender: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       office: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       position: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       startDate: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,

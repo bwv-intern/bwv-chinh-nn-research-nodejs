@@ -10,7 +10,8 @@
     "lint-and-fix": "eslint . --ext .ts --fix",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate-db": "npx sequelize-cli model:generate",
-    "migration:table": "npx sequelize-cli db:migrate"
+    "migration:table": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo --name"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.8",

@@ -2,7 +2,7 @@
 
 <div class="px-8 py-4 flex-1">
   <div class="float-right mb-4">
-    <form action="/users" method="get" class="flex items-center gap-2">
+    <form action="/users" method="get" class="flex items-center gap-2 filter">
       <input
         class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
         type="date"
@@ -82,7 +82,7 @@
     $('#myTable').DataTable();
   });
 
-  $('form').on('submit', function (event) {
+  $('form.filter').on('submit', function (event) {
     event.preventDefault();
 
     $('#dateStart').val();

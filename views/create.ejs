@@ -93,13 +93,12 @@
         </div>
         <div class="mt-4">
           <label for="startDate" class="block mb-1">Address</label>
-          <input
-            type="text"
-            name="address"
+          <textarea
             placeholder="Enter the address"
+            name="address"
             id="address"
             class="py-2 px-3 w-full rounded-md"
-          />
+          ></textarea>
         </div>
         <div class="mt-4">
           <button
@@ -114,18 +113,14 @@
   </div>
 </div>
 <script>
-  jQuery.validator.addMethod(
-    'phoneVN',
-    function (phoneNumber, element) {
-      phoneNumber = phoneNumber.replace(/\s+/g, '');
-      return (
-        this.optional(element) ||
-        (phoneNumber.length > 9 &&
-          phoneNumber.match(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/))
-      );
-    },
-    'Not valid Vietnamese phone number',
-  );
+  jQuery.validator.addMethod('phoneVN', function (phoneNumber, element) {
+    phoneNumber = phoneNumber.replace(/\s+/g, '');
+    return (
+      this.optional(element) ||
+      (phoneNumber.length > 9 &&
+        phoneNumber.match(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/))
+    );
+  });
 
   $('form').validate({
     rules: {
@@ -144,6 +139,7 @@
       },
       age: {
         required: true,
+        number: true,
         maxlength: 11,
       },
       gender: {
@@ -158,9 +154,28 @@
       startDate: {
         required: true,
       },
-      address: {
-        required: true,
+    },
+    onfocusout: function (element) {
+      $(element).valid();
+    },
+    messages: {
+      name: 'Name is required',
+      phoneNumber: {
+        required: 'Phone number is required',
+        phoneVN: 'Not valid Vietnamese phone number',
       },
+      email: {
+        required: 'Email is required',
+        email: 'Not valid email',
+      },
+      age: {
+        required: 'Age is required',
+        age: 'Age must be number',
+      },
+      gender: 'Gender is required',
+      office: 'Office is required',
+      position: 'Position is required',
+      startDate: 'Start date is required',
     },
   });
 </script>

@@ -16,7 +16,7 @@
               placeholder="Enter the name"
               id="name"
               value="<%= data.name %>"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -27,7 +27,7 @@
               name="phoneNumber"
               value="<%= data.phoneNumber %>"
               id="phoneNumber"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -38,7 +38,7 @@
               value="<%= data.email %>"
               name="email"
               id="email"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -50,7 +50,7 @@
               placeholder="Enter the age"
               name="age"
               id="age"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
         </div>
@@ -60,7 +60,7 @@
             <select
               name="gender"
               id="gender"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             >
               <option value="MALE" <%= data?.gender === "MALE" ? 'selected' : ''  %>>Male</option>
               <option value="FEMALE" <%= data?.gender === "FEMALE" ? 'selected' : ''  %>>Female</option>
@@ -74,7 +74,7 @@
               placeholder="Enter the office"
               name="office"
               id="office"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -85,7 +85,7 @@
               placeholder="Enter the position"
               name="position"
               id="position"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -95,7 +95,7 @@
               value="<%= data.startDate %>"
               name="startDate"
               id="startDate"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
         </div>
@@ -107,20 +107,32 @@
             name="address"
             placeholder="Enter the address"
             id="address"
-            class="py-1 px-2 w-full rounded-md"
+            class="py-2 px-3 w-full rounded-md"
           />
         </div>
         <div class="mt-4">
           <button
             type="submit"
-            class="bg-[#0077bb] text-white float-right py-2 rounded-md cursor-pointer px-3"
+            class="bg-[#0077bb] w-[90px] text-white float-right py-2 rounded-md cursor-pointer px-3 update-btn flex justify-center items-center gap-2"
           >
             Update
+            <div
+              class="loading-update hidden inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              role="status"
+            ></div>
           </button>
         </div>
       </fieldset>
     </form>
   </div>
 </div>
-
+<script src="/javascripts/validate.js"></script>
+<script>
+  $('form').on('submit', function() {
+    if(!isNotExisted) return;
+    $('.overlay').removeClass('hidden')
+    $(this).find('.loading-update').removeClass('hidden');
+    $(this).find('button.update-btn').attr('disabled', true);
+  })
+</script>
 <% include layout/footer %>

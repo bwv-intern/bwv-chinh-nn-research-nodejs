@@ -2,20 +2,30 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="../../public/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" type="text/javascript"></script>
     <style>
         a:hover {
             color: red;
             transition: all 0.2 linear;
         }
+
+        .error {
+            color: red;
+        }
     </style>
   </head>
-  <body>
+  <body class="relative">
+    <div class="absolute top-0 left-0 bottom-0 right-0 hidden bg-black opacity-50 flex items-center justify-center overlay z-50">
+        <div
+            class="inline-block h-10 w-10 animate-spin rounded-full border-[6px] border-solid border-blue-800 align-[-0.125em] border-e-transparent text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+        ></div>
+    </div>
     <div class="flex flex-col h-dvh">
         <header class="bg-yellow-600">
             <nav>

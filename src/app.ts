@@ -5,6 +5,7 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
 import methodOverride from 'method-override';
+import { localHelpers } from './utils/local-helpers';
 
 import { userRouter } from './routes/users';
 
@@ -19,8 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../', 'public')));
 app.use(methodOverride('_method'));
+localHelpers(app);
 
 app.use('/', userRouter);
 app.use('/users', userRouter);

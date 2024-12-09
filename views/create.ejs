@@ -14,7 +14,7 @@
               name="name"
               placeholder="Enter the name"
               id="name"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -24,7 +24,7 @@
               placeholder="Enter the phone number"
               name="phoneNumber"
               id="phoneNumber"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -34,7 +34,7 @@
               placeholder="Enter the email"
               name="email"
               id="email"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -45,7 +45,7 @@
               placeholder="Enter the age"
               name="age"
               id="age"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@
             <select
               name="gender"
               id="gender"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             >
               <option value="MALE">Male</option>
               <option value="FEMALE">Female</option>
@@ -68,7 +68,7 @@
               placeholder="Enter the office"
               name="office"
               id="office"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -78,7 +78,7 @@
               placeholder="Enter the position"
               name="position"
               id="position"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -87,31 +87,42 @@
               type="date"
               name="startDate"
               id="startDate"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
         </div>
         <div class="mt-4">
           <label for="startDate" class="block mb-1">Address</label>
-          <input
-            type="text"
-            name="address"
+          <textarea
             placeholder="Enter the address"
+            name="address"
             id="address"
-            class="py-1 px-2 w-full rounded-md"
-          />
+            class="py-2 px-3 w-full rounded-md"
+          ></textarea>
         </div>
         <div class="mt-4">
           <button
             type="submit"
-            class="bg-[#0077bb] text-white float-right py-2 rounded-md cursor-pointer px-3"
+            class="bg-[#0077bb] w-[88px] add-btn text-white float-right py-2 rounded-md cursor-pointer px-3 flex items-center justify-center gap-2"
           >
             Create
+            <div
+              class="loading-add hidden inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              role="status"
+            ></div>
           </button>
         </div>
       </fieldset>
     </form>
   </div>
 </div>
+<script src="/javascripts/validate.js"></script>
+<script>
+  $('form').on('submit', function () {
+    $('.overlay').removeClass('hidden');
+    $(this).find('.loading-add').removeClass('hidden');
+    $(this).find('button.add-btn').attr('disabled', true);
+  });
+</script>
 
 <% include layout/footer %>

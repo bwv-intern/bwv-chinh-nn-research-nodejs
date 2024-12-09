@@ -7,20 +7,24 @@ jQuery.validator.addMethod('phoneVN', function (phoneNumber, element) {
   );
 });
 
+let isNotExisted = true;
 jQuery.validator.addMethod('duplicatedEmail', function (email, element) {
-  let isNotExited = true;
   $.ajax({
     method: 'get',
     url: '/users/email/' + email,
     async: false,
     success: function (result) {
-      isNotExited = false;
+      isNotExisted = false;
+      $('.loading-add').addClass('hidden');
+      $('.loading-update').addClass('hidden');
     },
     error: function (error) {
-      isNotExited = true;
+      isNotExisted = true;
+      $('.loading-add').addClass('hidden');
+      $('.loading-update').addClass('hidden');
     },
   });
-  return this.optional(element) || isNotExited;
+  return this.optional(element) || isNotExisted;
 });
 
 $('form').validate({

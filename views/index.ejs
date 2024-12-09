@@ -2,7 +2,11 @@
 
 <div class="px-8 py-4 flex-1">
   <div class="float-right mb-4">
-    <form action="/users" method="get" class="flex items-center gap-2 filter">
+    <form
+      action="/users"
+      method="get"
+      class="flex items-center gap-2 justify-center filter"
+    >
       <input
         class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
         type="date"
@@ -17,13 +21,20 @@
         id="dateEnd"
         value="<%= filter.dateEnd %>"
       />
-      <button type="submit" class="bg-blue-500 rounded-md px-3 py-1 text-white">
+      <button
+        type="submit"
+        class="bg-blue-500 rounded-md px-3 py-1 text-white flex items-center gap-2 justify-center filter-btn"
+      >
         Filter
+        <div
+          class="loading-filter inline-block hidden h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+          role="status"
+        ></div>
       </button>
     </form>
     <p class="filter-error text-red-500"></p>
   </div>
-  <table id="myTable" class="display">
+  <table id="myTable" class="display !table-auto">
     <thead>
       <tr>
         <th class="!text-left">#</th>
@@ -42,33 +53,81 @@
     <tbody>
       <% for(let i = 0; i < data.length; i++) { %>
       <tr>
-        <td class="!text-left"><%= i + 1 %></td>
-        <td><%= data[i].name %></td>
-        <td class="!text-left"><%= data[i].phoneNumber %></td>
-        <td><%= data[i].email %></td>
-        <td class="!text-left"><%= data[i].age %></td>
-        <td><%= data[i].address %></td>
-        <td><%= capitalizeText(data[i].gender) %></td>
-        <td><%= data[i].office %></td>
-        <td><%= data[i].position %></td>
         <td class="!text-left">
-          <%= formatDate(data[i].startDate, 'DD-MM-YYYY') %>
+          <span class="w-2 block"><%= i + 1 %></span>
+        </td>
+        <td>
+          <div class="tooltip">
+            <span class="w-32 line-clamp-1"> <%= data[i].name %> </span>
+            <span class="tooltiptext"><%= data[i].name %></span>
+          </div>
+        </td>
+        <td class="!text-left w-120px]">
+          <div class="tooltip">
+            <span class="w-120px] line-clamp-1">
+              <%= data[i].phoneNumber %>
+            </span>
+            <div class="tooltiptext"><%= data[i].phoneNumber %></div>
+          </div>
+        </td>
+        <td>
+          <div class="tooltip">
+            <span class="w-36 line-clamp-1"><%= data[i].email %> </span>
+            <span class="tooltiptext"> <%= data[i].email %> </span>
+          </div>
+        </td>
+        <td class="!text-left"><%= data[i].age %></td>
+        <td class="w-26">
+          <div class="tooltip">
+            <span class="w-32 line-clamp-1"><%= data[i].address %> </span>
+            <span class="tooltiptext"> <%= data[i].address %> </span>
+          </div>
+        </td>
+        <td><%= capitalizeText(data[i].gender) %></td>
+        <td>
+          <div class="tooltip">
+            <span class="w-26 line-clamp-1"> <%= data[i].office %> </span>
+            <span class="tooltiptext"> <%= data[i].office %> </span>
+          </div>
+        </td>
+        <td>
+          <div class="tooltip">
+            <span class="w-26 line-clamp-1"><%= data[i].position %> </span>
+            <span class="tooltiptext"> <%= data[i].position %> </span>
+          </div>
+        </td>
+        <td class="!text-left">
+          <span class="w-[90px] line-clamp-1">
+            <%= formatDate(data[i].startDate, 'DD-MM-YYYY') %>
+          </span>
         </td>
         <td>
           <div class="flex items-center gap-2">
             <a
               href="/users/edit/<%= data[i].id %>"
-              class="text-white bg-blue-500 py-1 px-2 rounded-md inline-block hover:text-white"
+              class="text-white bg-blue-500 py-1 w-16 px-2 rounded-md flex items-center gap-2 justify-center hover:text-white edit-anchor"
             >
               Edit
+              <div
+                class="loading-edit inline-block hidden h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+                role="status"
+              ></div>
             </a>
-            <form action="/users/delete?_method=DELETE" method="post">
+            <form
+              action="/users/delete?_method=DELETE"
+              method="post"
+              class="del"
+            >
               <input type="hidden" name="id" value="<%= data[i].id %>" />
               <button
                 type="submit"
-                class="text-white bg-red-500 py-1 px-2 rounded-md"
+                class="text-white bg-red-500 w-20 py-1 px-2 rounded-md flex items-center gap-2 justify-center del-btn"
               >
                 Delete
+                <div
+                  class="loading-del inline-block hidden h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+                  role="status"
+                ></div>
               </button>
             </form>
           </div>

@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",
+    "@types/lodash": "^4.17.13",
     "@types/method-override": "^3.0.0",
     "sequelize-cli": "^6.6.2"
   }

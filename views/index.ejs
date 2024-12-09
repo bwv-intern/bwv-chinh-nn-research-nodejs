@@ -48,11 +48,11 @@
         <td><%= data[i].email %></td>
         <td class="!text-left"><%= data[i].age %></td>
         <td><%= data[i].address %></td>
-        <td><%= data[i].gender %></td>
+        <td><%= capitalizeText(data[i].gender) %></td>
         <td><%= data[i].office %></td>
         <td><%= data[i].position %></td>
         <td class="!text-left">
-          <%= dayjs(data[i].startDate).format('DD-MM-YYYY') %>
+          <%= formatDate(data[i].startDate, 'DD-MM-YYYY') %>
         </td>
         <td>
           <div class="flex items-center gap-2">

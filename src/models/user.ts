@@ -1,10 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from '../config/database';
-
-enum Gender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-}
+import { Gender } from '~/constants/enums';
 
 interface IUser {
   id: number;
@@ -56,6 +52,7 @@ User.init(
       allowNull: false,
     },
     email: {
+      unique: true,
       type: DataTypes.STRING,
       allowNull: false,
     },

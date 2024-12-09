@@ -66,14 +66,23 @@ export class UserController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const email = req.params.email;
-      const userExist = await User.findOne({
+      const email = req.query.email as string;
+      const idUser = req.query.idUser as string;
+
+      const userExist = await User.findAll({
         where: {
           email,
         },
       });
 
-      if (!userExist) {
+      if (idUser && Number(idUser) === userExist[0].id) {
+        res.status(404).json({
+          message: 'User not found.',
+        });
+        return;
+      }
+
+      if (!userExist.length) {
         res.status(404).json({
           message: 'User not found.',
         });
@@ -148,6 +157,13 @@ export class UserController {
       const id = req.params?.id;
 
       const userFound = await User.findByPk(id as string);
+
+      if (!userFound) {
+        res.render('error', {
+          message: 'User not found',
+          error: {},
+        });
+      }
 
       res.render('edit', { title: 'Edit', data: userFound });
     } catch (error) {

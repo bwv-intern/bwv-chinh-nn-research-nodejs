@@ -103,9 +103,13 @@
         <div class="mt-4">
           <button
             type="submit"
-            class="bg-[#0077bb] text-white float-right py-2 rounded-md cursor-pointer px-3"
+            class="bg-[#0077bb] w-[88px] add-btn text-white float-right py-2 rounded-md cursor-pointer px-3 flex items-center justify-center gap-2"
           >
             Create
+            <div
+              class="loading-add hidden inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              role="status"
+            ></div>
           </button>
         </div>
       </fieldset>
@@ -115,5 +119,12 @@
 
 <script src="/javascripts/duplicated-call/create.js"></script>
 <script src="/javascripts/validate.js"></script>
+<script>
+  $('form').on('submit', function () {
+    $('.overlay').removeClass('hidden');
+    $(this).find('.loading-add').removeClass('hidden');
+    $(this).find('button.add-btn').attr('disabled', true);
+  });
+</script>
 
 <% include layout/footer %>

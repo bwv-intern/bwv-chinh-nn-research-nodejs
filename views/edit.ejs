@@ -113,9 +113,13 @@
         <div class="mt-4">
           <button
             type="submit"
-            class="bg-[#0077bb] text-white float-right py-2 rounded-md cursor-pointer px-3"
+            class="bg-[#0077bb] w-[90px] text-white float-right py-2 rounded-md cursor-pointer px-3 update-btn flex justify-center items-center gap-2"
           >
             Update
+            <div
+              class="loading-update hidden inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              role="status"
+            ></div>
           </button>
         </div>
       </fieldset>
@@ -125,5 +129,13 @@
 
 <script src="/javascripts/duplicated-call/edit.js"></script>
 <script src="/javascripts/validate.js"></script>
+<script>
+  $('form').on('submit', function() {
+    if(!isNotExisted) return;
+    $('.overlay').removeClass('hidden')
+    $(this).find('.loading-update').removeClass('hidden');
+    $(this).find('button.update-btn').attr('disabled', true);
+  })
+</script>
 
 <% include layout/footer %>

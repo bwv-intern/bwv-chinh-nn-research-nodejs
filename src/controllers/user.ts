@@ -3,6 +3,7 @@ import { validate } from 'class-validator';
 import { and, Op } from 'sequelize';
 import { User } from '../models/user';
 import { UserValidator } from '../validations/user';
+import lodash from 'lodash';
 
 export class UserController {
   public getAll = async (
@@ -127,7 +128,7 @@ export class UserController {
 
     try {
       const newUser = {
-        name: userValidator.name,
+        name: lodash.capitalize(userValidator.name),
         phoneNumber: userValidator.phoneNumber,
         email: userValidator.email,
         age: userValidator.age,
@@ -190,16 +191,36 @@ export class UserController {
         return;
       }
 
+      const userValidator = new UserValidator();
+      userValidator.name = req.body.name;
+      userValidator.phoneNumber = req.body.phoneNumber;
+      userValidator.email = req.body.email;
+      userValidator.age = Number(req.body.age);
+      userValidator.address = req.body.address;
+      userValidator.gender = req.body.gender;
+      userValidator.office = req.body.office;
+      userValidator.position = req.body.position;
+      userValidator.startDate = req.body.startDate;
+
+      const errors = await validate(userValidator);
+      if (errors.length) {
+        res.json({
+          message: 'An error occurred',
+          errors,
+        });
+        return;
+      }
+
       const updateUser = {
-        name: req.body.name,
-        phoneNumber: req.body.phoneNumber,
-        email: req.body.email,
-        age: Number(req.body.age),
-        address: req.body.address,
-        gender: req.body.gender,
-        office: req.body.office,
-        position: req.body.position,
-        startDate: req.body.startDate,
+        name: lodash.capitalize(userValidator.name),
+        phoneNumber: userValidator.phoneNumber,
+        email: userValidator.email,
+        age: userValidator.age,
+        address: userValidator.address,
+        gender: userValidator.gender,
+        office: userValidator.office,
+        position: userValidator.position,
+        startDate: userValidator.startDate,
       };
 
       await User.update(updateUser, {

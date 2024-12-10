@@ -7,7 +7,7 @@
       <fieldset class="border border-gray-300 px-6 py-4">
         <legend class="text-lg">Information Of <%= data.name %></legend>
         <div class="flex justify-between gap-12">
-          <input type="hidden" name="id" id="id" value="<%= data.id %>" />
+          <input type="hidden" name="id" id="id" class="id_user" value="<%= data.id %>" />
           <div class="flex-1 w-full">
             <label for="name" class="block mb-1">Name</label>
             <input
@@ -16,7 +16,7 @@
               placeholder="Enter the name"
               id="name"
               value="<%= data.name %>"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -27,7 +27,7 @@
               name="phoneNumber"
               value="<%= data.phoneNumber %>"
               id="phoneNumber"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -38,7 +38,7 @@
               value="<%= data.email %>"
               name="email"
               id="email"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -50,7 +50,7 @@
               placeholder="Enter the age"
               name="age"
               id="age"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
         </div>
@@ -60,7 +60,7 @@
             <select
               name="gender"
               id="gender"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             >
               <option value="MALE" <%= data?.gender === "MALE" ? 'selected' : ''  %>>Male</option>
               <option value="FEMALE" <%= data?.gender === "FEMALE" ? 'selected' : ''  %>>Female</option>
@@ -74,7 +74,7 @@
               placeholder="Enter the office"
               name="office"
               id="office"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -85,7 +85,7 @@
               placeholder="Enter the position"
               name="position"
               id="position"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
           <div class="flex-1 w-full">
@@ -95,7 +95,7 @@
               value="<%= data.startDate %>"
               name="startDate"
               id="startDate"
-              class="py-1 px-2 w-full rounded-md"
+              class="py-2 px-3 w-full rounded-md"
             />
           </div>
         </div>
@@ -107,7 +107,7 @@
             name="address"
             placeholder="Enter the address"
             id="address"
-            class="py-1 px-2 w-full rounded-md"
+            class="py-2 px-3 w-full rounded-md"
           />
         </div>
         <div class="mt-4">
@@ -122,5 +122,8 @@
     </form>
   </div>
 </div>
+
+<script src="/javascripts/duplicated-call/edit.js"></script>
+<script src="/javascripts/validate.js"></script>
 
 <% include layout/footer %>

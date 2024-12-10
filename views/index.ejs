@@ -1,29 +1,28 @@
 <% include layout/header %>
 
 <div class="px-8 py-4 flex-1">
-  <form
-    action="/users"
-    method="get"
-    class="flex items-center gap-2 float-right mb-4"
-  >
-    <input
-      class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
-      type="date"
-      name="dateStart"
-      id="dateStart"
-      value="<%= filter.dateStart %>"
-    />
-    <input
-      class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
-      type="date"
-      name="dateEnd"
-      id="dateEnd"
-      value="<%= filter.dateEnd %>"
-    />
-    <button type="submit" class="bg-blue-500 rounded-md px-3 py-1 text-white">
-      Filter
-    </button>
-  </form>
+  <div class="float-right mb-4">
+    <form action="/users" method="get" class="flex items-center gap-2 filter">
+      <input
+        class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
+        type="date"
+        name="dateStart"
+        id="dateStart"
+        value="<%= filter.dateStart %>"
+      />
+      <input
+        class="border border-gray-400 rounded-md py-1 px-2 cursor-pointer"
+        type="date"
+        name="dateEnd"
+        id="dateEnd"
+        value="<%= filter.dateEnd %>"
+      />
+      <button type="submit" class="bg-blue-500 rounded-md px-3 py-1 text-white">
+        Filter
+      </button>
+    </form>
+    <p class="filter-error text-red-500"></p>
+  </div>
   <table id="myTable" class="display">
     <thead>
       <tr>
@@ -78,10 +77,6 @@
   </table>
 </div>
 
-<script>
-  $(document).ready(function () {
-    $('#myTable').DataTable();
-  });
-</script>
+<script src="/javascripts/index.js"></script>
 
 <% include layout/footer %>

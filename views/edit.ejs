@@ -7,7 +7,7 @@
       <fieldset class="border border-gray-300 px-6 py-4">
         <legend class="text-lg">Information Of <%= data.name %></legend>
         <div class="flex justify-between gap-12">
-          <input type="hidden" name="id" id="id" value="<%= data.id %>" />
+          <input type="hidden" name="id" id="id" class="id_user" value="<%= data.id %>" />
           <div class="flex-1 w-full">
             <label for="name" class="block mb-1">Name</label>
             <input
@@ -122,5 +122,8 @@
     </form>
   </div>
 </div>
+
+<script src="/javascripts/duplicated-call/edit.js"></script>
 <script src="/javascripts/validate.js"></script>
+
 <% include layout/footer %>

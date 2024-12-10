@@ -1,3 +1,7 @@
+function _requiredMessage(name) {
+  return `(*) ${name} is required field.`;
+}
+
 jQuery.validator.addMethod('phoneVN', function (phoneNumber, element) {
   phoneNumber = phoneNumber.replace(/\s+/g, '(*) ');
   return (
@@ -5,22 +9,6 @@ jQuery.validator.addMethod('phoneVN', function (phoneNumber, element) {
     (phoneNumber.length > 9 &&
       phoneNumber.match(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/))
   );
-});
-
-jQuery.validator.addMethod('duplicatedEmail', function (email, element) {
-  let isNotExited = true;
-  $.ajax({
-    method: 'get',
-    url: '/users/email/' + email,
-    async: false,
-    success: function (result) {
-      isNotExited = false;
-    },
-    error: function (error) {
-      isNotExited = true;
-    },
-  });
-  return this.optional(element) || isNotExited;
 });
 
 $('form').validate({
@@ -58,24 +46,24 @@ $('form').validate({
     },
   },
   messages: {
-    name: '(*) Name is required',
+    name: _requiredMessage('Name'),
     phoneNumber: {
-      required: '(*) Phone number is required',
+      required: _requiredMessage('Phone number'),
       phoneVN: '(*) Not valid Vietnamese phone number',
     },
     email: {
-      required: '(*) Email is required',
+      required: _requiredMessage('Email'),
       email: '(*) Not valid email',
       duplicatedEmail: '(*) Email already exist.',
     },
     age: {
-      required: '(*) Age is required',
+      required: _requiredMessage('Age'),
       age: '(*) Age must be number',
     },
-    gender: '(*) Gender is required',
-    office: '(*) Office is required',
-    position: '(*) Position is required',
-    startDate: '(*) Start date is required',
+    gender: _requiredMessage('Gender'),
+    office: _requiredMessage('Office'),
+    position: _requiredMessage('Position'),
+    startDate: _requiredMessage('Start date'),
   },
   onfocusout: function (element) {
     $(element).valid();

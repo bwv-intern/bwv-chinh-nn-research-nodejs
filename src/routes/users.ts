@@ -11,7 +11,7 @@ userRouter.get('/create', userController.getCreateView);
 
 userRouter.get('/edit/:id', userController.getEditView);
 
-userRouter.get('/users/email/:email', userController.getByEmail);
+userRouter.get('/users/email', userController.getByEmail);
 
 userRouter.post('/create', userController.create);
 
